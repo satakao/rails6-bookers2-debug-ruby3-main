@@ -22,7 +22,7 @@
           <td><%= link_to 'Destroy', book_path(@book),method: :delete, "data-confirm" => "本当に消しますか？" , class: "btn btn-sm btn-danger"%>
           <% end %></tr>
         </table>
-        <table>
+        <table >
           <% @book_comments.each do |book_comment| %>
             <tr>
               <td><%= link_to(book_comment.user) do %>

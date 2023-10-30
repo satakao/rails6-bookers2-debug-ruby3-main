@@ -7,8 +7,9 @@ class BooksController < ApplicationController
     @book_comment = BookComment.new
     @book_comments = @book.book_comments
   end
-
+  
   def index
+    
     @book = Book.new
     @books = Book.all
   end

@@ -4,6 +4,10 @@
       <th>image</th>
       <th>name</th>
       <th colspan="3"></th>
+      <th colspan="3"></th>
+      <th colspan="3"></th>
+      <th colspan="3"></th>
+      <th colspan="3"></th>
     </tr>
   </thead>
   <tbody>
@@ -11,6 +15,15 @@
       <tr>
         <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
         <td><%= user.name %></td>
+        <td>フォロー数：<%= user.followings.count %></td>
+        <td>フォロワー数：<%= user.followers.count %></td>
+        <% if user != current_user  %>
+          <% if current_user.following?(user) %>
+            <td><%= link_to "フォロー外す", user_relationship_path(user,current_user) , method: :delete %></td>
+          <% else %>
+            <td><%= link_to "フォローする", user_relationships_path(user,current_user), method: :post %></td>
+          <% end %>
+        <% end %>
         <td><%= link_to 'Show', user %></td>
       </tr>
     <% end %>
