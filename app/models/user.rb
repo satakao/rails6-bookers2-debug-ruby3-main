@@ -36,9 +36,9 @@ class User < ApplicationRecord
   end
   def self.looks(search,word)
     if search =="perfect_match"
-      @user = User.where("name LIKE?", "#{word}")
+      @user = User.where("name LIKE ?", "#{word}")#nameカラムからwhereでUserモデルから、LIKEで後ろに書かれた同じ文字列(wordから)を探してくる（？は入力で指定された値になる）
     elsif search == "pertial_match"
-      @user = User.where("name LIKE?", "%#{word}%")
+      @user = User.where("name LIKE ?", "%#{word}%")
     else
       @user =User.all
     end
