@@ -23,6 +23,8 @@ Rails.application.routes.draw do
      get :followings, :followers
     end
   end
+  resources :searches, only: [:search]
+  
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

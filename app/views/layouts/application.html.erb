@@ -12,6 +12,20 @@
   <body>
     <%= render 'layouts/header' %>
       <main>
+        <% if user_signed_in? %>
+        <div class = "container">
+          <div class = "row">
+             <div class="serch-form mx-auto mt-3 mb-3 col-mt-12 " >
+                <%= form_with url: searches_search_path, method: :get do |f| %>
+                  <%= f.text_field :word %>
+                  <%= f.select :range, options_for_select([['User'],['Book']]) %>
+                  <%= f.select :search, options_for_select([["完全一致","perfect_match"],["部分一致","pertial_match"]]) %>
+                  <%= f.submit "検索" %>
+                <% end %>
+            </div>
+          </div>
+        </div>
+        <% end %>
         <%= yield %>
         <p id="notice"><%= notice %></p>
       </main>

@@ -11,4 +11,13 @@ class Book < ApplicationRecord
   def book_commented_by?(user)
     book_comments.exists?(user_id: user.id)
   end
+  def self.looks(search,word)
+    if search == "perfect_match"
+      @book =Book.where("title LIKE?","#{word}")
+    elsif search == "perfcial_match"
+      @book = Book.where("title LIKE?","%#{word}%")
+    else
+      @book =Book.all
+    end
+  end
 end
