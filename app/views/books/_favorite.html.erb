@@ -1,9 +1,0 @@
- <% if book_fav.favorited_by?(current_user) %>
-  <td><%= link_to(book_favorite_path(book_fav) , method: :delete)do %>
-  🤍<%= book_fav.favorites.count %>いいね</td>
-  <% end %>
-<% else %>
-  <td><%= link_to(book_favorite_path(book_fav) , method: :post)do %>
-  🤍<%= book_fav.favorites.count %>いいね</td>
-  <% end %>
-<% end %>
