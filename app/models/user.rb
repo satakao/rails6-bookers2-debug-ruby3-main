@@ -7,12 +7,15 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
-  #フォローした、されたの関係
+  #自分がフォロー、アンフォローする記述、されたの関係。ユーザーモデルが多くのRelationshipのレコードを持つためhas_manyで記述している。１つ目の記述は仮想のテーブル名で名前自分で命名する。2つ目で紐付けるモデル名。３つ目はこの外部キーに保存してといった記述relationshipsは中間テーブル
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  #相手がフォロー、アンフォローする記述(一覧画面で使う)上の記述のみでフォローアンフォローはできるようになる
   has_many :reverse_of_relationships, class_name:"Relationship", foreign_key: "followed_id", dependent: :destroy
   #一覧画面で使う
-  has_many :followings, through: :relationships, source: :followed#フォローした人を上記で定義したrelationshipsメソッドを使ってフォローした人の情報を引っ張ってこれる(followedテーブルを元に)
-  has_many :followers, through: :reverse_of_relationships, source: :follower#フォローされている人を上記で定義したreverse_of_relationshipsメソッドを使ってフォローした人の情報を引っ張ってこれる(followerテーブルを元に)
+  #フォローした人を上記で定義したrelationshipsメソッドを使ってフォローしてくれてる人(followed)の情報を引っ張ってこれる
+  has_many :followings, through: :relationships, source: :followed
+  #フォローされている人を上記で定義したreverse_of_relationshipsメソッドを使ってフォローした人の情報を引っ張ってこれる(followerテーブルを元に)
+  has_many :followers, through: :reverse_of_relationships, source: :follower
   has_one_attached :profile_image
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true

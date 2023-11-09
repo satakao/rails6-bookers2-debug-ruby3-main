@@ -5,6 +5,9 @@ class BookCommentsController < ApplicationController
     @book_comment = current_user.book_comments.new(book_comment_params)#コメントはどのユーザーがしたか分からないといけないためcurrent_userのデータテーブルbook_commentsにあるbook_idと前述で持ってきたidを紐付けている
     @book_comment.book_id = @book.id
     @book_comment.save
+    # pp @book
+    # pp @book_comment
+    # pp @book_comment.book
     # redirect_to book_path(@book.id)
   end
 

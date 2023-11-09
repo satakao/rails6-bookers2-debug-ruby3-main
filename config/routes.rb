@@ -15,16 +15,18 @@ Rails.application.routes.draw do
     resources :book_comments,only: [:create, :destroy]
 
   end
+  #ユーザーにフォロー機能をネストさせてこのユーザーをフォローするといったアクションでユーザー指定できるようにする
   resources :users, only: [:new, :index,:show,:edit,:update]do
     resources :relationships,only: [:create, :destroy,]
   end
   resources :users do
+    #member doを使うことで特定のユーザーidを紐づけてそのユーザーのfollowings,followersをget,一覧で表示できるように
     member do
      get :followings, :followers
     end
   end
   resources :searches, only: [:search]
-  
+
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
