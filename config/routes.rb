@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'messages/create'
   get 'searches/search'
   # get 'relasionships/create'
   # get 'relasionships/destroy'
@@ -13,7 +14,6 @@ Rails.application.routes.draw do
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update]do
     resource :favorite,only: [:create, :destroy]
     resources :book_comments,only: [:create, :destroy]
-
   end
   #ユーザーにフォロー機能をネストさせてこのユーザーをフォローするといったアクションでユーザー指定できるようにする
   resources :users, only: [:new, :index,:show,:edit,:update]do
@@ -26,7 +26,8 @@ Rails.application.routes.draw do
     end
   end
   resources :searches, only: [:search]
-
+  resources :messages, only: [:create]
+  resources :rooms, only: [:create, :index, :show]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

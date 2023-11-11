@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
   #自分がフォロー、アンフォローする記述、されたの関係。ユーザーモデルが多くのRelationshipのレコードを持つためhas_manyで記述している。１つ目の記述は仮想のテーブル名で名前自分で命名する。2つ目で紐付けるモデル名。３つ目はこの外部キーに保存してといった記述relationshipsは中間テーブル
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   #相手がフォロー、アンフォローする記述(一覧画面で使う)上の記述のみでフォローアンフォローはできるようになる
